@@ -1,11 +1,10 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
+
+<head th:include="fragments/header :: header"></head>
+
 <body>
-<p th:text="'Hello, ' + ${name} + '!'" />
-<a href="/main">Main page</a>
+    <p th:text="'Hello, ' + ${name} + '!'"></p>
+    <a href="/main">Main page</a>
 </body>
 </html>

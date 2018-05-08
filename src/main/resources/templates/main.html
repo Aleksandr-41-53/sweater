@@ -14,9 +14,10 @@
 </nav>
 
 <div>
-    <form th:action="@{/add}" method="post">
+    <form th:action="@{/add}" method="post" enctype="multipart/form-data">
         <input type="text" name="text" placeholder="Enter message">
         <input type="text" name="tag" placeholder="Tag">
+        <input type="file" name="file">
         <button type="submit">Add</button>
     </form>
     <form th:action="@{/main}" method="get">
@@ -31,6 +32,7 @@
         <th>TEXT</th>
         <th>TAG</th>
         <th>AUTHOR</th>
+        <th>FILE</th>
     </tr>
     </thead>
     <tbody>
@@ -39,6 +41,7 @@
         <td th:text="${message.text}"></td>
         <td th:text="${message.tag}"></td>
         <td th:text="${message.authorName}"></td>
+        <td><img th:if="${message.filename}" th:src="@{'/img/' + ${message.filename}}" th:alt="${message.filename}"></td>
     </tr>
     </tbody>
 </table>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragments/header :: header"></head>
+
+<body>
+
+<form th:action="@{/user}" method="post">
+    <div class="form-group" hidden>
+        <label for="userid">User id</label>
+        <input type="hidden" class="form-control" name="userId" id="userid"  aria-describedby="userHelp" th:value="${user.id}">
+    </div>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" name="username" id="username" aria-describedby="userHelp" placeholder="Enter Username" th:value="${user.username}">
+    </div>
+    <div th:each="role : ${roles}" class="form-check form-check-inline">
+        <input th:name="${role}" th:checked="${#sets.contains(user.roles,role)}" class="form-check-input" type="checkbox" th:id="${role} + 'Checkbox'">
+        <label class="form-check-label" th:for="${role} + 'Checkbox'" th:text="${role}"></label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+</body>
+
+</html>

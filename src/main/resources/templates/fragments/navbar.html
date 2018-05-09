@@ -1,0 +1,27 @@
+<nav th:fragment="mainbar" class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <a class="navbar-brand" th:href="@{/}">Sweater</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/}">Home</a>
+            </li>
+            <li sec:authorize="isAuthenticated()" class="nav-item">
+                <a class="nav-link" th:href="@{/messages}">Messages</a>
+            </li>
+            <li sec:authorize="hasAuthority('ADMIN')" class="nav-item">
+                <a class="nav-link" th:href="@{/user}">User list</a>
+            </li>
+        </ul>
+    </div>
+
+    <div sec:authorize="isAuthenticated()" class="navbar-text mr-3">[[${#httpServletRequest.remoteUser}]]</div>
+    <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+        <button class="btn btn-outline-success" type="submit">Sign Out</button>
+    </form>
+
+</nav>

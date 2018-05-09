@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:include="fragments/header :: header"></head>
+<head th:replace="fragments/header :: header"></head>
 
 <body>
 
-<div class="container">
+<nav th:replace="fragments/navbar :: mainbar" ></nav>
+
+<div class="container mt-5 mt-2">
+
+    <h3>Login</h3>
+
     <div th:if="${param.logout}" class="alert alert-warning alert-dismissible fade show" role="alert">
         <strong>You have been logged out.</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -14,22 +19,17 @@
     </div>
 
     <form th:action="@{/login}" method="post">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Login</label>
-            <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
-            <div th:if="${param.error}" class="invalid-feedback">
-                Invalid username and password.
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button><span>&nbsp;or&nbsp;</span><a class="btn btn-secondary" th:href="@{/registration}">Add new User</a>
+
+        <div th:insert="fragments/login :: login" th:remove="tag">
+
+        </div><span>&nbsp;or&nbsp;</span>
+        <a class="btn btn-secondary" th:href="@{/registration}">Add new User</a>
+
     </form>
 
-
 </div>
+
+<div th:replace="fragments/assets :: scripts"></div>
 
 </body>
 

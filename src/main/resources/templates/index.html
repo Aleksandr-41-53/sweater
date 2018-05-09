@@ -1,10 +1,32 @@
 <!DOCTYPE HTML>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
-<head th:include="fragments/header :: header"></head>
+<head th:replace="fragments/header :: header"></head>
 
 <body>
-<p th:text="'Hello, ' + ${name} + '!'"></p>
-<a href="/main">Main page</a>
+
+<nav th:replace="fragments/navbar :: mainbar" ></nav>
+
+<div class="container mt-5 mb-2">
+
+    <div sec:authorize="isAnonymous()">
+
+        <h5>Hello,  guest!</h5>
+        <div>This is a simple clone off Twitter <a th:href="@{/login}" class="btn btn-secondary">Login</a></div>
+
+    </div>
+
+    <div sec:authorize="isAuthenticated()">
+
+        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+
+    </div>
+
+</div>
+
+<div th:replace="fragments/assets :: scripts"></div>
+
 </body>
+
 </html>

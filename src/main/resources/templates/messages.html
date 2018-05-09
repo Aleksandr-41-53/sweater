@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: header"></head>
+
+<body>
+
+<nav th:replace="fragments/navbar :: mainbar" ></nav>
+
+<div class="container mt-5 mb-2">
+
+    <form class="form-inline" th:action="@{/messages}" method="get">
+        <input class="form-control form-control-lg mb-2 mr-2" type="text" name="filter" placeholder="I Find tag..." th:value="${filter}">
+        <button class="btn btn-lg btn-outline-info mb-2" type="submit">Find</button>
+    </form>
+
+    <a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Add new message
+    </a>
+    <div class="collapse" id="collapseExample">
+
+        <form th:action="@{/add}" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-3">
+                    <input class="form-control mt-2" type="text" name="text" placeholder="Enter message">
+                </div>
+                <div class="col-3">
+                    <input class="form-control mt-2" type="text" name="tag" placeholder="Tag">
+                </div>
+                <div class="col-3">
+                    <div class="custom-file mt-2 form-control">
+                        <input class="form-control custom-file-input" type="file" name="file" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-primary mt-2" type="submit">Send</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="card-columns mt-2">
+
+        <div th:each="message : ${messages}" class="card">
+            <img class="card-img-top" th:if="${message.filename}" th:src="@{'/img/' + ${message.filename}}" th:alt="${message.filename}">
+            <div class="card-body">
+                <h5 th:text="${message.tag}" class="card-title"></h5>
+                <p th:text="${message.text}" class="card-text"></p>
+            </div>
+            <div th:text="${message.authorName}" class="card-footer bg-transparent border-success"></div>
+        </div>
+
+    </div>
+
+</div>
+
+<div th:replace="fragments/assets :: scripts"></div>
+
+</body>
+
+</html>

@@ -33,7 +33,7 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping(path = "/main")
+    @GetMapping(path = "/messages")
     public String main(
             @RequestParam(required = false, defaultValue = "") String filter,
             Model model
@@ -48,8 +48,8 @@ public class MainController {
 
         model.addAttribute("messages", messages);
         model.addAttribute("filter", filter);
-        model.addAttribute("title", "Main Sweter");
-        return "main";
+        model.addAttribute("title", "Message Sweter");
+        return "messages";
     }
 
     @PostMapping("/add")
@@ -80,7 +80,7 @@ public class MainController {
         Iterable<Message> messages = messageRepo.findAll();
         model.addAttribute("messages", messages);
         model.addAttribute("title", "Main Sweter");
-        return "main";
+        return "messages";
     }
 
 }

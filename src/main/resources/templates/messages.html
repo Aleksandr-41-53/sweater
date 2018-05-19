@@ -17,27 +17,34 @@
     <a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
         Add new message
     </a>
-    <div class="collapse" id="collapseExample">
+    <div th:classappend="${textError != null}?show"
+         class="collapse" id="collapseExample">
 
         <form th:action="@{/add}" method="post" enctype="multipart/form-data">
-            <div class="row">
-                <div class="col-3">
-                    <input class="form-control mt-2" type="text" name="text" placeholder="Enter message">
-                </div>
-                <div class="col-3">
-                    <input class="form-control mt-2" type="text" name="tag" placeholder="Tag">
-                </div>
-                <div class="col-3">
-                    <div class="custom-file mt-2 form-control">
-                        <input class="form-control custom-file-input" type="file" name="file" id="customFile">
-                        <label class="custom-file-label" for="customFile">Choose file</label>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <button class="btn btn-primary mt-2" type="submit">Send</button>
+            <div class="form-group">
+                <input th:classappend="${textError != null}?is-invalid"
+                       class="form-control mt-2" type="text" name="text" placeholder="Enter message">
+                <div th:if="${textError}"
+                     th:text="${textError}"
+                     class="invalid-feedback"></div>
+            </div>
+            <div class="form-group">
+                <input th:value="${message != null}?${message.tag}"
+                       th:classappend="${tagError != null}?is-invalid"
+                       class="form-control mt-2" type="text" name="tag" placeholder="Tag">
+                <div th:if="${tagError}"
+                     th:text="${tagError}"
+                     class="invalid-feedback"></div>
+            </div>
+            <div class="form-group">
+                <div class="custom-file mt-2 form-control">
+                    <input class="form-control custom-file-input" type="file" name="file" id="customFile">
+                    <label class="custom-file-label" for="customFile">Choose file</label>
                 </div>
             </div>
-
+            <div class="form-group">
+                <button class="btn btn-primary mt-2" type="submit">Send</button>
+            </div>
         </form>
 
     </div>

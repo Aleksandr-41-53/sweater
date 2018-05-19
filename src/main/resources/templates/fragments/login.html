@@ -1,16 +1,43 @@
 <form th:fragment="login" th:remove="tag">
     <div class="form-group">
         <label for="exampleInputUsername1">Username</label>
-        <input type="text" name="username" class="form-control" id="exampleInputUsername1" aria-describedby="emailHelp" placeholder="Enter username">
+        <input th:classappend="${usernameError != null}?is-invalid"
+               th:value="${user?.username}"
+               type="text" name="username" class="form-control" id="exampleInputUsername1"
+               aria-describedby="emailHelp" placeholder="Enter username">
+        <div th:if="${usernameError}"
+             th:text="${usernameError}"
+             class="invalid-feedback"></div>
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
-        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        <input th:classappend="${passwordError != null}?is-invalid"
+               type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        <div th:if="${passwordError}"
+             th:text="${passwordError}"
+             class="invalid-feedback"></div>
     </div>
-    <div th:if="${#httpServletRequest.requestURI == '/registration'}" class="form-group">
+    <div th:if="${#httpServletRequest.requestURI == '/registration'}"
+         class="form-group">
+        <label for="exampleInputPassword2">Password</label>
+        <input th:classappend="${password2Error != null}?is-invalid"
+               type="password" name="password2" class="form-control" id="exampleInputPassword2" placeholder="Retype password">
+        <div th:if="${password2Error}"
+             th:text="${password2Error}"
+             class="invalid-feedback"></div>
+    </div>
+    <div th:if="${#httpServletRequest.requestURI == '/registration'}"
+         class="form-group">
         <label for="exampleInputEmail1">E-mail</label>
-        <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="some@some.com">
+        <input th:classappend="${emailError != null}?is-invalid"
+               th:value="${user?.email}"
+               type="email" name="email" class="form-control" id="exampleInputEmail1"
+               placeholder="some@some.com">
+        <div th:if="${emailError}"
+             th:text="${emailError}"
+             class="invalid-feedback"></div>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 
 </form>
+

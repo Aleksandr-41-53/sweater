@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/header :: header"></head>
 
@@ -18,12 +18,12 @@
         Add new message
     </a>
     <div th:classappend="${textError != null}?show"
-         class="collapse" id="collapseExample">
+         class="collapse mt-3" id="collapseExample">
 
         <form th:action="@{/add}" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <input th:classappend="${textError != null}?is-invalid"
-                       class="form-control mt-2" type="text" name="text" placeholder="Enter message">
+                       class="form-control" type="text" name="text" placeholder="Enter message">
                 <div th:if="${textError}"
                      th:text="${textError}"
                      class="invalid-feedback"></div>
@@ -31,19 +31,17 @@
             <div class="form-group">
                 <input th:value="${message != null}?${message.tag}"
                        th:classappend="${tagError != null}?is-invalid"
-                       class="form-control mt-2" type="text" name="tag" placeholder="Tag">
+                       class="form-control" type="text" name="tag" placeholder="Tag">
                 <div th:if="${tagError}"
                      th:text="${tagError}"
                      class="invalid-feedback"></div>
             </div>
-            <div class="form-group">
-                <div class="custom-file mt-2 form-control">
-                    <input class="form-control custom-file-input" type="file" name="file" id="customFile">
-                    <label class="custom-file-label" for="customFile">Choose file</label>
-                </div>
+            <div class="form-group custom-file">
+                <input class="form-control custom-file-input" type="file" name="file" id="customFile" lang="ru">
+                <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
-            <div class="form-group">
-                <button class="btn btn-primary mt-2" type="submit">Send</button>
+            <div class="form-group mt-3">
+                <button class="btn btn-primary" type="submit">Send</button>
             </div>
         </form>
 
@@ -65,6 +63,12 @@
 </div>
 
 <div th:replace="fragments/assets :: scripts"></div>
+<script type="text/javascript">
+    $('.custom-file-input').on('change', function() {
+        let fileName = $(this).val().split('\\').pop();
+        $(this).siblings('.custom-file-label').addClass('selected').html(fileName);
+    });
+</script>
 
 </body>
 

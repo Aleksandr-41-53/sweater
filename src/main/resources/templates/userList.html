@@ -16,6 +16,7 @@
             <th>email</th>
             <th>is active</th>
             <th>roles</th>
+            <th>uuid</th>
             <th></th>
         </tr>
         </thead>
@@ -27,6 +28,7 @@
             <td>
                 <span th:each="role : ${user.roles}" th:text="${role} + '; '">Role list</span>
             </td>
+            <td th:text="${user?.activationCode}"></td>
             <td><a th:href="@{'/user/' + ${user.id}}">Edit</a></td>
         </tr>
         </tbody>

@@ -4,15 +4,14 @@ import com.darthjaxx.sweater.domain.Role;
 import com.darthjaxx.sweater.domain.User;
 import com.darthjaxx.sweater.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.util.StringUtils;
 
-import javax.transaction.Transactional;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -25,6 +24,9 @@ public class UserService implements UserDetailsService {
     private MailService mailService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Value("${hostname}")
+    private String hosname;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -52,8 +54,9 @@ public class UserService implements UserDetailsService {
             String message = String.format(
                     "Hello, %s!\n" +
                             "Welcome to Sweater.\n" +
-                            "Please, visit next link: http://localhost:8080/activate/%s",
+                            "Please, visit next link: http://%s/activate/%s",
                     user.getUsername(),
+                    hosname,
                     user.getActivationCode()
             );
 

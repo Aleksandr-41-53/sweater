@@ -37,7 +37,7 @@ public class MainController {
     }
 
     @GetMapping(path = "/messages")
-    public String main(
+    public String messages(
             @RequestParam(required = false, defaultValue = "") String filter,
             Model model
     ) {
@@ -51,7 +51,7 @@ public class MainController {
 
         model.addAttribute("messages", messages);
         model.addAttribute("filter", filter);
-        model.addAttribute("title", "Message Sweter");
+        model.addAttribute("title", "Message Sweater");
         return "messages";
     }
 

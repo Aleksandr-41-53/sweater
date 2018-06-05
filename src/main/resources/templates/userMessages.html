@@ -15,19 +15,20 @@
         Edit message
     </a>
     <div th:if="${isCurrentUser}"
-         th:classappend="${textError != null}?show"
+         th:classappend="${(textError != null) or (param.message != null)}?show"
          class="collapse mt-3" id="collapseExample">
 
-        <form th:action="@{/add}" method="post" enctype="multipart/form-data">
+        <form th:action="@{/user-messages/{id}(id=${user.id})}" method="post" enctype="multipart/form-data">
             <div class="form-group">
-                <input th:classappend="${textError != null}?is-invalid"
+                <input th:value="${message?.text}"
+                       th:classappend="${textError != null}?is-invalid"
                        class="form-control" type="text" name="text" placeholder="Enter message">
                 <div th:if="${textError}"
                      th:text="${textError}"
                      class="invalid-feedback"></div>
             </div>
             <div class="form-group">
-                <input th:value="${message != null}?${message.tag}"
+                <input th:value="${message?.tag}"
                        th:classappend="${tagError != null}?is-invalid"
                        class="form-control" type="text" name="tag" placeholder="Tag">
                 <div th:if="${tagError}"
@@ -40,7 +41,7 @@
             </div>
             <input th:value="${message?.id}" type="hidden" name="id" id="id" lang="ru">
             <div class="form-group mt-3">
-                <button class="btn btn-primary" type="submit">Save message</button>
+                <button class="btn btn-success" type="submit">Save message</button>
             </div>
         </form>
 

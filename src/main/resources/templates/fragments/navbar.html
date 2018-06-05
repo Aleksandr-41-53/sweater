@@ -26,7 +26,7 @@
         </ul>
     </div>
 
-    <div sec:authorize="isAuthenticated()" class="navbar-text mr-3">[[${#httpServletRequest.remoteUser}]]</div>
+    <div sec:authorize="isAuthenticated()" class="navbar-text mr-3">[[${user.username}]]</div>
     <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
         <button class="btn btn-outline-success" type="submit">Sign Out</button>
     </form>

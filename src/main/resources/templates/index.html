@@ -19,7 +19,7 @@
 
     <div sec:authorize="isAuthenticated()">
 
-        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        <h1 th:inline="text">Hello, [[${user.username}]]!</h1>
 
     </div>
 

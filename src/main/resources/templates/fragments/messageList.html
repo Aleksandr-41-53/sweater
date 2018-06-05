@@ -7,10 +7,16 @@
                  th:src="@{'/img/' + ${message.filename}}"
                  th:alt="${message.filename}">
             <div class="card-body">
-                <h5 th:text="${message.tag}" class="card-title"></h5>
+                <h5 th:text="'#' + ${message.tag}" class="card-title"></h5>
                 <p th:text="${message.text}" class="card-text"></p>
             </div>
-            <div th:text="${message.authorName}" class="card-footer bg-transparent border-success"></div>
+            <div class="card-footer bg-transparent border-success">
+                <a th:text="${message.authorName}"
+                   th:href="@{|/user-messages/${message.author.id}|}"></a>
+                <a th:if="${message.author.id} == ${user.id}"
+                   th:href="@{|/user-messages/${message.author.id}?message=${message.id}|}"
+                    class="btn btn-outline-primary">Edit</a>
+            </div>
         </div>
 
     </div>

@@ -20,8 +20,12 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
-    public String userList(Model model) {
+    public String userList(
+            @AuthenticationPrincipal User user,
+            Model model
+    ) {
         model.addAttribute("users", userService.findAll());
+        model.addAttribute("user", user);
         return "userList";
     }
 
@@ -49,8 +53,11 @@ public class UserController {
     }
 
     @GetMapping("profile")
-    public String getProfile(Model model, @AuthenticationPrincipal User user) {
-        model.addAttribute("username", user.getUsername());
+    public String getProfile(
+            Model model,
+            @AuthenticationPrincipal User user
+    ) {
+        model.addAttribute("user", user);
         model.addAttribute("email", user.getEmail());
 
         return "profile";

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -31,14 +33,19 @@ public class MainController {
     private String uploadPath;
 
     @GetMapping(path = "/")
-    public String index(Model model) {
+    public String index(
+            @AuthenticationPrincipal User user,
+            Model model
+    ) {
         model.addAttribute("title", "Sweater");
+        model.addAttribute("user", user);
         return "index";
     }
 
     @GetMapping(path = "/messages")
     public String messages(
             @RequestParam(required = false, defaultValue = "") String filter,
+            @AuthenticationPrincipal User user,
             Model model
     ) {
         Iterable<Message> messages = messageRepo.findAll();
@@ -51,6 +58,7 @@ public class MainController {
 
         model.addAttribute("messages", messages);
         model.addAttribute("filter", filter);
+        model.addAttribute("user", user);
         model.addAttribute("title", "Message Sweater");
         return "messages";
     }
@@ -90,7 +98,23 @@ public class MainController {
         }
         Iterable<Message> messages = messageRepo.findAll();
         model.addAttribute("messages", messages);
+        model.addAttribute("user", user);
         return "messages";
+    }
+
+    @GetMapping("/user-messages/{user}")
+    public String userMessages(
+            @AuthenticationPrincipal User currentUser,
+            @PathVariable(value = "user") User user,
+            Model model
+    ) {
+        Set<Message> messages = user.getMessages();
+        
+        model.addAttribute("messages", messages);
+        model.addAttribute("user", currentUser);
+        model.addAttribute("isCurrentUser", currentUser.equals(user));
+
+        return "userMessages";
     }
 
 }

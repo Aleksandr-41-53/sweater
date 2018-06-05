@@ -5,6 +5,7 @@ import com.darthjaxx.sweater.domain.dto.CaptchaResponseDto;
 import com.darthjaxx.sweater.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -77,6 +78,7 @@ public class RegistrationController {
 
     @GetMapping("/activate/{code}")
     public String activate(
+            @AuthenticationPrincipal User user,
             Model model,
             @PathVariable String code
     ) {
@@ -84,6 +86,7 @@ public class RegistrationController {
 
         if (isActivated) {
             model.addAttribute("message", "User successfully activated");
+            model.addAttribute("user", user);
         } else {
             model.addAttribute("message", "Activation code is not found!");
         }

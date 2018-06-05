@@ -9,18 +9,13 @@
 
 <div class="container mt-5 mb-2">
 
-    <form class="form-inline" th:action="@{/messages}" method="get">
-        <input  th:value="${filter}"
-                class="form-control form-control-lg mb-2 mr-2"
-                type="search" name="filter" placeholder="I Find tag..." aria-label="Search">
-        <button class="btn btn-lg btn-outline-info mb-2" type="submit">Find</button>
-    </form>
-
-    <a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapseExample"
-       role="button" aria-expanded="false" aria-controls="collapseExample">
-        Add new message
+    <a th:if="${isCurrentUser}"
+       class="btn btn-outline-secondary" data-toggle="collapse"
+       href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Edit message
     </a>
-    <div th:classappend="${textError != null}?show"
+    <div th:if="${isCurrentUser}"
+         th:classappend="${textError != null}?show"
          class="collapse mt-3" id="collapseExample">
 
         <form th:action="@{/add}" method="post" enctype="multipart/form-data">
@@ -43,8 +38,9 @@
                 <input class="form-control custom-file-input" type="file" name="file" id="customFile" lang="ru">
                 <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
+            <input th:value="${message?.id}" type="hidden" name="id" id="id" lang="ru">
             <div class="form-group mt-3">
-                <button class="btn btn-primary" type="submit">Send</button>
+                <button class="btn btn-primary" type="submit">Save message</button>
             </div>
         </form>
 

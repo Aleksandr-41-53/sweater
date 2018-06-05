@@ -1,0 +1,17 @@
+<div th:fragment="list" th:remove="tag">
+    <div class="card-columns mt-2">
+
+        <div th:each="message : ${messages}" class="card">
+            <img class="card-img-top"
+                 th:if="${message.filename}"
+                 th:src="@{'/img/' + ${message.filename}}"
+                 th:alt="${message.filename}">
+            <div class="card-body">
+                <h5 th:text="${message.tag}" class="card-title"></h5>
+                <p th:text="${message.text}" class="card-text"></p>
+            </div>
+            <div th:text="${message.authorName}" class="card-footer bg-transparent border-success"></div>
+        </div>
+
+    </div>
+</div>

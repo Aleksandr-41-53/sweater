@@ -13,6 +13,10 @@
             <li sec:authorize="isAuthenticated()" class="nav-item">
                 <a class="nav-link" th:href="@{/messages}">Messages</a>
             </li>
+            <li th:if="${user}"
+                sec:authorize="isAuthenticated()" class="nav-item">
+                <a class="nav-link" th:href="@{/user-messages/{id}(id=${user.id})}">My messages</a>
+            </li>
             <li sec:authorize="isAuthenticated()" class="nav-item">
                 <a class="nav-link" th:href="@{/user/profile}">Profile</a>
             </li>

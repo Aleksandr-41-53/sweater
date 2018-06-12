@@ -9,6 +9,48 @@
 
 <div class="container mt-5 mb-2">
 
+    <h3 th:text="${userChannel.username}"></h3>
+
+    <div class="row mb-2">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Subscriptions</div>
+                    <h3 class="card-text">
+                        <a th:text="${subscriptionsCount}"
+                           th:href="@{/user/subscriptions/{id}(id=${userChannel.id})}">
+                        </a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Subscribers</div>
+                    <h3 class="card-text">
+                        <a th:text="${subscribersCount}"
+                           th:href="@{/user/subscribers/{id}(id=${userChannel.id})}"></a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:unless="${isCurrentUser}"
+         th:remove="tag">
+        <a th:if="${isSubscriber}"
+           th:href="@{/user/unsubscribe/{id}(id=${userChannel.id})}"
+           class="btn btn-warning">
+            Unsubscribe
+        </a>
+        <a th:unless="${isSubscriber}"
+           th:href="@{/user/subscribe/{id}(id=${userChannel.id})}"
+           class="btn btn-info">
+            Subscribe
+        </a>
+    </div>
+
     <a th:if="${isCurrentUser}"
        class="btn btn-outline-secondary" data-toggle="collapse"
        href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">

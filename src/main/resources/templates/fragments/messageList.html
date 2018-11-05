@@ -1,11 +1,11 @@
 <div th:fragment="list" th:remove="tag">
-    <div class="card-columns mt-2">
+    <div class="card-columns mt-2" id="message-list">
 
-        <div th:each="message : ${messages}" class="card">
+        <div th:each="message : ${messages}" class="card" th:data-id="${message.id}">
             <img class="card-img-top"
                  th:if="${message.filename}"
                  th:src="@{'/img/' + ${message.filename}}"
-                 th:alt="${message.filename}">
+                 th:alt="${message.filename}" />
             <div class="card-body">
                 <h5 th:text="'#' + ${message.tag}" class="card-title"></h5>
                 <p th:text="${message.text}" class="card-text"></p>

@@ -12,7 +12,7 @@
     <form class="form-inline" th:action="@{/messages}" method="get">
         <input  th:value="${filter}"
                 class="form-control form-control-lg mb-2 mr-2"
-                type="search" name="filter" placeholder="I Find tag..." aria-label="Search">
+                type="search" name="filter" placeholder="I Find tag..." aria-label="Search" />
         <button class="btn btn-lg btn-outline-info mb-2" type="submit">Find</button>
         <a class="btn btn-lg btn-outline-warning mb-2 mx-2" th:href="@{/messages}">Remove</a>
     </form>
@@ -27,7 +27,7 @@
         <form th:action="@{/add}" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <input th:classappend="${textError != null}?is-invalid"
-                       class="form-control" type="text" name="text" placeholder="Enter message">
+                       class="form-control" type="text" name="text" placeholder="Enter message" />
                 <div th:if="${textError}"
                      th:text="${textError}"
                      class="invalid-feedback"></div>
@@ -35,13 +35,13 @@
             <div class="form-group">
                 <input th:value="${message != null}?${message.tag}"
                        th:classappend="${tagError != null}?is-invalid"
-                       class="form-control" type="text" name="tag" placeholder="Tag">
+                       class="form-control" type="text" name="tag" placeholder="Tag" />
                 <div th:if="${tagError}"
                      th:text="${tagError}"
                      class="invalid-feedback"></div>
             </div>
             <div class="form-group custom-file">
-                <input class="form-control custom-file-input" type="file" name="file" id="customFile" lang="ru">
+                <input class="form-control custom-file-input" type="file" name="file" id="customFile" lang="ru" />
                 <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
             <div class="form-group mt-3">

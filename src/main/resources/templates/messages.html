@@ -24,7 +24,7 @@
     <div th:classappend="${textError != null}?show"
          class="collapse mt-3" id="collapseExample">
 
-        <form th:action="@{/add}" method="post" enctype="multipart/form-data">
+        <form th:action="@{/messages}" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <input th:classappend="${textError != null}?is-invalid"
                        class="form-control" type="text" name="text" placeholder="Enter message" />

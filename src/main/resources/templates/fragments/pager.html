@@ -1,0 +1,52 @@
+<div th:fragment="pager" th:remove="tag">
+    <ul class="pagination mt-3"
+        th:if="${page.totalPages > 1}">
+
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" href="#">Page</a>
+        </li>
+
+        <li class="page-item"
+            th:classappend="${page.first} ? 'disabled' : ''">
+            <a class="page-link" tabindex="-1"
+               th:href="@{${url}(page=(${page.number} - 1))}">&#8592;</a>
+        </li>
+
+        <li class="page-item"
+            th:if="${page.number > 2}">
+            <a class="page-link"
+               th:href="@{${url}(page=1, size=${page.size})}">1</a>
+        </li>
+
+        <li class="page-item disabled"
+            th:if="${page.number >= 4}">
+            <a href="#" class="page-link">...</a>
+        </li>
+
+        <li class="page-item"
+            th:each="p : ${#numbers.sequence(0, page.totalPages-1)}"
+            th:classappend="(${p} == ${page.number}) ? 'active' : ''"
+            th:if="${p >= (page.number - 2) && p <= (page.number + 2)}">
+            <a class="page-link"
+               th:href="@{${url}(page=${p}, size=${page.size})}"
+               th:text="${p + 1}"></a>
+        </li>
+
+        <li class="page-item disabled"
+            th:if="${page.number <= (page.totalPages-5)}">
+            <a href="#" class="page-link">...</a>
+        </li>
+
+        <li class="page-item"
+            th:if="${page.number < page.totalPages - 3}">
+            <a class="page-link"
+               th:href="@{${url}(page=${page.totalPages - 1}, size=${page.size})}" th:text="${page.totalPages}"></a>
+        </li>
+
+        <li th:class="${page.last} ? 'disabled page-item' : 'page-item'">
+            <a class="page-link" tabindex="-1"
+               th:href="@{${url}(page=(${page.number} + 1))}">&#8594;</a>
+        </li>
+
+    </ul>
+</div>

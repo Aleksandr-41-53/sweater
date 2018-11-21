@@ -1,7 +1,10 @@
 <div th:fragment="list" th:remove="tag">
+
+    <div th:replace="fragments/pager :: pager"></div>
+
     <div class="card-columns mt-2" id="message-list">
 
-        <div th:each="message : ${messages}" class="card" th:data-id="${message.id}">
+        <div th:each="message : ${page.content}" class="card" th:data-id="${message.id}">
             <img class="card-img-top"
                  th:if="${message.filename}"
                  th:src="@{'/img/' + ${message.filename}}"
@@ -20,4 +23,7 @@
         </div>
 
     </div>
+
+    <div th:replace="fragments/pager :: pager"></div>
+
 </div>

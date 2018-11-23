@@ -13,12 +13,30 @@
                 <h5 th:text="'#' + ${message.tag}" class="card-title"></h5>
                 <p th:text="${message.text}" class="card-text"></p>
             </div>
-            <div class="card-footer bg-transparent border-success">
-                <a th:text="${message.authorName}"
-                   th:href="@{|/user-messages/${message.author.id}|}"></a>
-                <a th:if="${message.author.id} == ${user.id}"
-                   th:href="@{|/user-messages/${message.author.id}?message=${message.id}|}"
-                    class="btn btn-outline-primary">Edit</a>
+            <div class="card-footer text-muted">
+                <div class="row">
+                    <a class="col align-self-center"
+                       th:text="${message.authorName}"
+                       th:href="@{|/user-messages/${message.author.id}|}"></a>
+
+                    <a class="col align-self-center"
+                       th:href="@{|/messages/${message.id}/like|}"
+                       th:if="${!message.meLiked}">
+                        <i class="far fa-heart"></i>
+                        <span th:text="${message.likes}"></span>
+                    </a>
+
+                    <a class="col align-self-center"
+                       th:if="${message.meLiked}"
+                       th:href="@{|/messages/${message.id}/like|}">
+                        <i class="fas fa-heart"></i>
+                        <span th:text="${message.likes}"></span>
+                    </a>
+
+                    <a class="col btn btn-primary"
+                       th:if="${message.author.id} == ${user.id}"
+                       th:href="@{|/user-messages/${message.author.id}?message=${message.id}|}">Edit</a>
+                </div>
             </div>
         </div>
 

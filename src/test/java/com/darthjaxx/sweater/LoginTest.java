@@ -1,6 +1,6 @@
 package com.darthjaxx.sweater;
 
-import com.darthjaxx.sweater.controller.MainController;
+import com.darthjaxx.sweater.controller.MessageController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class LoginTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private MainController controller;
+    private MessageController controller;
 
     @Test
     public void contextLoadTest() throws Exception {

@@ -19,7 +19,7 @@ public interface MessageRepo extends CrudRepository<Message, Long> {
             "FROM Message AS m LEFT JOIN m.likes AS ml " +
             "GROUP BY m " +
             "ORDER BY m.id DESC")
-    Page<MessageDto> findAll(Pageable pageable, @Param("user") User author);
+    Page<MessageDto> findAll(Pageable pageable, @Param("user") User user);
 
     @Query("SELECT NEW com.darthjaxx.sweater.domain.dto.MessageDto(" +
             "m, " +

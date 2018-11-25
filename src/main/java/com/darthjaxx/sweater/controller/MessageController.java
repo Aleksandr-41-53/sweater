@@ -92,7 +92,7 @@ public class MessageController {
             messageRepo.save(message);
         }
 
-        Page<MessageDto> page = messageRepo.findAll(pageable, user);
+        Page<MessageDto> page = messageService.messageList(pageable, null, user);
 
         model.addAttribute("url", "/messages");
         model.addAttribute("page", page);
